@@ -1,24 +1,24 @@
 pipeline {
-agent any
-stages {
-stage('拉取代码') {
-steps {
-checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
-userRemoteConfigs: [[credentialsId: '2', url:
-'https://gitee.com/halu-zhenghao/jenkins-demo.git']]])
-}
-}
-stage('编译构建') {
-steps {
-sh label: '', script: 'mvn clean package'
-}
-}
-stage('项目部署') {
-steps {
-deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://192.168.31.109:8080')], contextPath: null,
-war: 'target/*.war'
-}
-}
-}
+  agent any
+  stages {
+        stage('拉取代码') {
+        steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+            doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+            userRemoteConfigs: [[credentialsId: '2', url:
+              'https://gitee.com/halu-zhenghao/jenkins-demo.git']]])
+              }
+        }
+       stage('编译构建') {
+           steps {
+           sh label: '', script: 'clean package'
+           }
+       }
+        stage('项目部署') {
+        steps {
+            deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://192.168.31.109:8080')],
+              contextPath: null,  war: 'target/*.war'
+            }
+        }
+    }
 }
