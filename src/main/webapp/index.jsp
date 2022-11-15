@@ -11,5 +11,6 @@
 <hr>
 <a href="deleteUser">删除用户</a>
 <a href="/findUser">查询用户</a>
+<a href="/findUser">jenkins</a>
 </body>
 </html>
